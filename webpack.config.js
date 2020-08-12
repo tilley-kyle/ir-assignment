@@ -5,8 +5,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 module.exports = {
   mode: 'development',
   entry: {
-    app: './src/index.js',
-    print: './src/print.js',
+    app: './src/App.jsx',
   },
   devtool: 'inline-source-map',
   devServer: {
@@ -22,8 +21,16 @@ module.exports = {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
   },
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
   module: {
     rules: [
+      {
+        test: /\.(js|jsx)$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/,
+      },
       {
         test: /\.css$/,
         use: [
